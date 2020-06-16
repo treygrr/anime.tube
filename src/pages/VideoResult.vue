@@ -36,7 +36,7 @@ export default Vue.extend({
     async grabSearchData (name: string, ep: string) {
       this.searching = true
       return await this.$axios.get(
-          `http://localhost:3001/getvideolink?anime=${name}&episode=${ep}`,
+          `http://157.245.246.238:3000/getvideolink?anime=${name}&episode=${ep}`,
           {
             headers: { 'Access-Control-Allow-Origin': '*' }
           }

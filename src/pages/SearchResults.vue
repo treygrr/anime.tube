@@ -48,7 +48,7 @@ export default Vue.extend({
       if (animeName === '') return
       this.searching = true
       return await this.$axios.get(
-          `http://localhost:3001/search?anime=${animeName}`,
+          `http://157.245.246.238:3000/search?anime=${animeName}`,
           {
             headers: { 'Access-Control-Allow-Origin': '*' }
           }
