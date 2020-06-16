@@ -19,7 +19,7 @@
           anime.tube
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>anime.tube beta v1.0</div>
       </q-toolbar>
       <q-input
         filled class="MainLayout-Input q-pa-none q-ma-none absolute-bottom"
@@ -83,10 +83,6 @@ export default {
     EssentialLink
   },
   methods: {
-    setAnimeTitle () {
-      console.log('we pushed to page')
-      // this.animeTitleProp = val
-    },
     submit (refKey) {
     // Setting the variable only when submitted
       this.test = this.$refs[refKey].model

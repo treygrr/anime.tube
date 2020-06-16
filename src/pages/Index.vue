@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <p class="column justify-center">Home page content soon!</p>
+    <p class="column justify-center">Home page contents soon!</p>
   </q-page>
 </template>
 

@@ -1,6 +1,6 @@
 import { store } from 'quasar/wrappers'
 import Vuex from 'vuex'
-
+import anime from '../store/anime'
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state';
 
@@ -22,6 +22,7 @@ export default store(function ({ Vue }) {
   const Store = new Vuex.Store<StoreInterface>({
     modules: {
       // example
+      anime
     },
 
     // enable strict mode (adds overhead!)

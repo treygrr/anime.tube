@@ -5,48 +5,38 @@
         color="primary"
         size="2em"
       />
-      <div class="q-pt-md">Searching</div>
+      <div>Searching</div>
     </div>
-    <episode-list
-        v-if="episodeData.length > 0"
-        active
-        :episodeData="episodeData"
-    />
-
+    <div>
+      <div>
+        <video-player
+        :videoUrl="this.videoUrl"
+        >
+        </video-player>
+      </div>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
-import EpisodeList from 'components/EpisodeList.vue'
+import VideoPlayer from 'components/VideoPlayer.vue'
 
 export default Vue.extend({
-  name: 'SearchResults',
+  name: 'VideoResult',
   props: [
-    'animeTitle'
+    'animeName',
+    'episode'
   ],
-  watch: {
-    searchTerm: function (newVal, oldVal) {
-      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-      this.grabSearchData(newVal)
-      if (this.$props.animeTitle === '') {
-        if (this.$route.path !== '') this.$router.push({ name: 'home' })
-      }
-    }
-  },
-  components: { EpisodeList },
+  components: { VideoPlayer },
   mounted () {
-    if (this.$props.animeTitle === '') return
-    this.grabSearchData(this.$props.animeTitle)
+    this.grabSearchData(this.$props.animeName, this.$props.episode)
   },
   methods: {
-    async grabSearchData (animeName: string) {
-      this.episodeData = []
-      if (animeName === '') return
+    async grabSearchData (name: string, ep: string) {
       this.searching = true
       return await this.$axios.get(
-          `http://localhost:3001/getepisodes?anime=${this.$props.animeTitle}`,
+          `http://localhost:3001/getvideolink?anime=${name}&episode=${ep}`,
           {
             headers: { 'Access-Control-Allow-Origin': '*' }
           }
@@ -69,8 +59,8 @@ export default Vue.extend({
             icon: 'check'
           })
           this.searching = false
-          console.log(response)
-          this.episodeData = response.data
+          this.videoUrl = response.data.videoLink
+          console.log(response.data.videoLink)
         })
         .catch(err => {
           this.$q.notify({
@@ -85,8 +75,8 @@ export default Vue.extend({
   },
   data () {
     return {
-      searching: false,
-      episodeData: []
+      videoUrl: '',
+      searching: false
     }
   }
 })

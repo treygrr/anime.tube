@@ -1,7 +1,7 @@
 <template>
 <div class="q-pa-xs SearchCardWrapper">
-  <div v-for="anime in animeSearchData" :key="anime.id" class="q-pa-xs">
-      <q-card @click="lol()" class="SearchCard">
+  <div v-for="anime in animeSearchData" :key="anime.name" class="q-pa-xs">
+      <q-card class="SearchCard">
         <q-card-section horizontal>
             <q-img
             class="col-5"
@@ -26,10 +26,13 @@
           <q-btn flat>
           Rating: {{ anime.score }} / 10
           </q-btn>
-          <q-btn flat color="primary">
-          Watch {{ anime.seo_name }} now
-          </q-btn>
-          <q-btn :click="setAnimeTitle()" clickable>watch now</q-btn>
+          <q-btn v-if="anime.seo_name"
+            @click="setAnimeTitle(anime.seo_name)"
+            flat
+            class="text-primary"
+            style="width:100%;"
+            >watch now</q-btn
+          >
         </q-card-actions>
       </q-card>
   </div>
@@ -44,26 +47,23 @@
 </style>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'SearchCards',
-  props: {
-    searchTerm: {
-      default: ''
-    },
-    animeSearchData: {
-      default: () => []
-    }
+  computed: {
+    ...mapGetters(['name'])
   },
-  data () {
-    return {
-      animeTitle: ''
-    }
-  },
+  props: [
+    'animeSearchData'
+  ],
   methods: {
-    setAnimeTitle () {
-      console.log('I got clicked to set a name.')
-      // this.$emit('setAnimeTitle')
+    ...mapMutations(['SET_ANIME_NAME']),
+    setAnimeTitle (val) {
+      console.log('I got clicked to set a name.', val)
+      this.SET_ANIME_NAME(val)
+
+      if (this.$route.path !== '') this.$router.push({ name: 'episodes', params: { animeTitle: val } })
     }
   }
 }

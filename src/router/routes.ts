@@ -5,9 +5,10 @@ const routes: RouteConfig[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', name: 'home', component: () => import('pages/Index.vue') },
-      { path: '/search', name: 'search', component: () => import('pages/SearchResults.vue') },
-      { path: '/episodes', name: 'episodes', component: () => import('pages/EpisodeList.vue') }
+      { path: '', name: 'home', component: () => import('pages/Index.vue'), props: true },
+      { path: '/search', name: 'search', component: () => import('pages/SearchResults.vue'), props: true },
+      { path: '/episodes', name: 'episodes', component: () => import('pages/EpisodeList.vue'), props: true },
+      { path: '/video', name: 'video', component: () => import('pages/VideoResult.vue'), props: true }
     ]
   }
 ]

@@ -7,10 +7,10 @@
       />
       <div>Searching</div>
     </div>
-    <search-cards v-if="animeSearchData.length > 0"
+    <search-cards
       active
       :animeSearchData="animeSearchData"
-    ></search-cards>
+    />
   </q-page>
 </template>
 
@@ -35,10 +35,14 @@ export default Vue.extend({
   components: { SearchCards },
   mounted () {
     if (this.searchTerm === '') return
-    console.log('hi')
     this.grabSearchData(this.searchTerm)
   },
   methods: {
+    setAnimeTitle (val: string) {
+      console.log('we pushed to page')
+      // this.animeTitleProp = val
+      console.log(val)
+    },
     async grabSearchData (animeName: string) {
       this.animeSearchData = []
       if (animeName === '') return
