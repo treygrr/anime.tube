@@ -1,13 +1,10 @@
 <template>
-<div class="q-pa-md SearchCardWrapper column" v-if="this.$props.videoUrl">
-  <q-btn @click="goback">Back to Episodes</q-btn>
-  <div>
-    <div>
-    <q-video
-      :src="this.$props.videoUrl"
-    />
-  </div>
-</div>
+<div class="q-pa-md row" style="width: 100%; height: auto" v-if="this.$props.videoUrl">
+  <q-btn @click="goback" style="width: 100%; max-height: 70px;">Back to Episodes</q-btn>
+  <q-video
+    style="width: 100%; height: 100%; object-fit: cover;"
+    :src="this.$props.videoUrl"
+  />
 </div>
 </template>
 

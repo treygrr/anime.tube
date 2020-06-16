@@ -1,20 +1,16 @@
 <template>
-  <q-page class="row-reverse items-center justify-evenly">
-    <div v-if="searching" class="SearchResultsSpinner column items-center">
+  <q-page class="row">
+    <div v-if="searching" class="SearchResultsSpinner column">
       <q-spinner-bars
         color="primary"
         size="2em"
       />
       <div>Searching</div>
     </div>
-    <div>
-      <div>
-        <video-player
-        :videoUrl="this.videoUrl"
-        >
-        </video-player>
-      </div>
-    </div>
+      <video-player
+      :videoUrl="this.videoUrl"
+      >
+      </video-player>
   </q-page>
 </template>
 
