@@ -1,7 +1,7 @@
 <template>
-<div class="q-pa-md row" style="width: 100%; height: auto" v-if="this.$props.videoUrl">
+<div class="q-pa-md" style="width: 100%;" v-if="this.$props.videoUrl">
   <q-btn @click="goback" style="width: 100%; max-height: 70px;">Back to Episodes</q-btn>
-  <video controlsclass="videoPlayer" autoplay controls>
+  <video controls class="videoPlayer" autoplay>
     <source :src="this.$props.videoUrl" type="video/mp4">
     <source :src="this.$props.videoUrl" type="video/ogg">
   </video>
