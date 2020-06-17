@@ -58,11 +58,11 @@ export default Vue.extend({
           this.videoUrl = response.data.videoLink
           console.log(response.data.videoLink)
         })
-        .catch(err => {
+        .catch(() => {
           this.$q.notify({
             color: 'negative',
             position: 'top',
-            message: err,
+            message: 'Failed to grab video',
             icon: 'report_problem'
           })
           this.searching = false
