@@ -1,6 +1,6 @@
 <template>
-  <q-page class="row">
-    <div v-if="searching" class="SearchResultsSpinner column">
+  <q-page class="row center justify-center">
+    <div v-if="searching" class="SearchResultsSpinner column justify-center">
       <q-spinner-bars
         color="primary"
         size="2em"

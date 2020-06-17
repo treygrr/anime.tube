@@ -1,10 +1,10 @@
 <template>
 <div class="q-pa-md row" style="width: 100%; height: auto" v-if="this.$props.videoUrl">
   <q-btn @click="goback" style="width: 100%; max-height: 70px;">Back to Episodes</q-btn>
-  <video
-    style="width: 100%; height: 100%; object-fit: cover;"
-    :src="this.$props.videoUrl"
-  />
+  <video controlsclass="videoPlayer" autoplay controls>
+    <source :src="this.$props.videoUrl" type="video/mp4">
+    <source :src="this.$props.videoUrl" type="video/ogg">
+  </video>
 </div>
 </template>
 
