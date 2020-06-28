@@ -17,7 +17,6 @@ export default {
     'episodeData'
   ],
   mounted () {
-    console.log(this.$props.videoUrl)
     this.getToVideoUrl(this.$props.videoUrl)
   },
   methods: {
@@ -26,7 +25,6 @@ export default {
     },
     getToVideoUrl (link) {
       this.link = link
-      console.log(this.link)
     }
   }
 }
