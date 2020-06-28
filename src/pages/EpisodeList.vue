@@ -8,9 +8,9 @@
       <div class="q-pt-md">Searching</div>
     </div>
     <episode-list
-        v-if="episodeData.length > 0"
+        v-if="passingData.length > 0"
         active
-        :episodeData="episodeData"
+        :episodeData="this.passingData"
     />
 
   </q-page>
@@ -24,7 +24,8 @@ import EpisodeList from 'components/EpisodeList.vue'
 export default Vue.extend({
   name: 'SearchResults',
   props: [
-    'animeTitle'
+    'animeTitle',
+    'episodeData'
   ],
   watch: {
     searchTerm: function (newVal, oldVal) {
@@ -37,12 +38,16 @@ export default Vue.extend({
   },
   components: { EpisodeList },
   mounted () {
+    if (this.$props.episodeData) {
+      this.passingData = this.$props.episodeData
+      return
+    }
     if (this.$props.animeTitle === '') return
     this.grabSearchData(this.$props.animeTitle)
   },
   methods: {
     async grabSearchData (animeName: string) {
-      this.episodeData = []
+      this.passingData = []
       if (animeName === '') return
       this.searching = true
       return await this.$axios.get(
@@ -70,7 +75,7 @@ export default Vue.extend({
           })
           this.searching = false
           console.log(response)
-          this.episodeData = response.data
+          this.passingData = response.data
         })
         .catch(err => {
           this.$q.notify({
@@ -86,7 +91,7 @@ export default Vue.extend({
   data () {
     return {
       searching: false,
-      episodeData: []
+      passingData: []
     }
   }
 })

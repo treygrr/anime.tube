@@ -9,6 +9,7 @@
     </div>
       <video-player
       :videoUrl="this.videoUrl"
+      :episodeData="this.$props.episodeData"
       >
       </video-player>
   </q-page>
@@ -22,7 +23,8 @@ export default Vue.extend({
   name: 'VideoResult',
   props: [
     'animeName',
-    'episode'
+    'episode',
+    'episodeData'
   ],
   components: { VideoPlayer },
   mounted () {

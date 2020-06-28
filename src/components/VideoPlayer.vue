@@ -13,7 +13,8 @@
 export default {
   name: 'VideoPlayer',
   props: [
-    'videoUrl'
+    'videoUrl',
+    'episodeData'
   ],
   mounted () {
     console.log(this.$props.videoUrl)
@@ -21,7 +22,7 @@ export default {
   },
   methods: {
     goback () {
-      this.$router.push({ name: 'episodes' })
+      this.$router.push({ name: 'episodes', params: { episodeData: this.$props.episodeData } })
     },
     getToVideoUrl (link) {
       this.link = link

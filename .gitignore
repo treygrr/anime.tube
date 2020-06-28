@@ -6,6 +6,16 @@ node_modules
 .quasar
 dist/cordova/*
 dist/electron/*
+
+
+# stuff that shouldn't be in here
+quasar-debug-key.jks
+quasar-debug-key.jks.old
+quasar-release-key.jks
+quasar-release-key.jks.old
+build.cordova.json
+
+
 # Cordova related directories and files
 /src-cordova/node_modules
 /src-cordova/platforms
