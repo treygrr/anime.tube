@@ -1,16 +1,11 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <div v-if="searching" class="SearchResultsSpinner column items-center">
-      <q-spinner-bars
-        color="primary"
-        size="2em"
-      />
-      <div>Searching</div>
+  <q-page class="flex flex-center">
+    <div v-if="searching" class="column text-center">
+      <q-spinner-bars color="primary" size="2em" class="q-mx-auto" />
+      <div class="q-pa-sm">Searching</div>
     </div>
-    <search-cards
-      active
-      :animeSearchData="animeSearchData"
-    />
+
+    <search-cards active :animeSearchData="animeSearchData" />
   </q-page>
 </template>
 
@@ -20,9 +15,7 @@ import SearchCards from 'components/SearchCards.vue'
 
 export default Vue.extend({
   name: 'SearchResults',
-  props: [
-    'searchTerm'
-  ],
+  props: ['searchTerm'],
   watch: {
     searchTerm: function (newVal, oldVal) {
       console.log('Prop changed: ', newVal, ' | was: ', oldVal)
@@ -47,14 +40,15 @@ export default Vue.extend({
       this.animeSearchData = []
       if (animeName === '') return
       this.searching = true
-      return await this.$axios.get(
-          `http://157.245.246.238:3000/search?anime=${animeName}`,
-          {
-            headers: { 'Access-Control-Allow-Origin': '*' }
-          }
-      )
-        .then((response) => {
-          if (response.status === 404 || (response.status === 200 && response.data.length === 0)) {
+      return await this.$axios
+        .get(`http://157.245.246.238:3000/search?anime=${animeName}`, {
+          headers: { 'Access-Control-Allow-Origin': '*' }
+        })
+        .then(response => {
+          if (
+            response.status === 404 ||
+            (response.status === 200 && response.data.length === 0)
+          ) {
             this.$q.notify({
               color: 'negative',
               position: 'top',
