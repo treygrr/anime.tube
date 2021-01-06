@@ -1,12 +1,8 @@
 <template>
   <!-- Card Wrapper -->
-  <div v-if="this.$props.animeSearchData" class="q-pa-md row justify-center">
+  <div v-if="filteredResults" class="q-pa-md row justify-center">
     <!-- Anime Card -->
-    <q-card
-      v-for="anime in filteredResults(this.$props.animeSearchData)"
-      :key="anime.name"
-      class="q-ma-md"
-    >
+    <q-card v-for="anime in filteredResults" :key="anime.name" class="q-ma-md">
       <q-card-section
         class="no-padding card-image q-img__content"
         :style="
@@ -18,34 +14,14 @@
           <div class="text-h6 ellipsis">{{ anime.name }}</div>
 
           <!-- If not movie or special -->
-          <div
-            v-if="
-              anime.episodes[0].episode_name != 'Movie' &&
-                anime.episodes[0].episode_name != 'Special'
-            "
-            class="text-subtitle2"
-          >
+          <div class="text-subtitle2">
             Latest: {{ anime.episodes[0].episode_name }}
           </div>
         </div>
       </q-card-section>
 
       <q-card-actions class="row justify-between">
-        <q-btn
-          glossy
-          color="light-blue-9"
-          label="Movie"
-          v-if="anime.episodes[0].episode_name === 'Movie'"
-        />
-
-        <q-btn
-          glossy
-          color="red-9"
-          label="special"
-          v-else-if="anime.episodes[0].episode_name === 'Special'"
-        />
-
-        <q-btn glossy color="purple-9" label="Series" v-else class="no-hover" />
+        <q-btn glossy color="purple-9" label="Series" class="no-hover" />
 
         <span class="q-mx-sm text-subtitle2">
           Rating: {{ anime.score }} / 10
@@ -69,11 +45,22 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'SearchCards',
-  computed: {
-    ...mapGetters(['name'])
-  },
-
   props: ['animeSearchData'],
+
+  computed: {
+    ...mapGetters(['name']),
+
+    filteredResults () {
+      const results = this.$props.animeSearchData
+
+      return results.filter(
+        result =>
+          result.episodes.length &&
+          result.episodes[0].episode_name !== 'Movie' &&
+          result.episodes[0].episode_name !== 'Special'
+      )
+    }
+  },
 
   methods: {
     ...mapMutations(['SET_ANIME_NAME']),
@@ -83,16 +70,6 @@ export default {
       if (this.$route.path !== '') {
         this.$router.push({ name: 'episodes', params: { animeTitle: val } })
       }
-    },
-
-    filteredResults: function (yeet) {
-      const results = yeet
-      const type = results
-      return type.filter(function (name) {
-        if (name.episodes[0].episode_name === 'Special') return
-        if (name.episodes[0].episode_name === 'Movie') return
-        return name.episodes[0].episode_name
-      })
     }
   }
 }
