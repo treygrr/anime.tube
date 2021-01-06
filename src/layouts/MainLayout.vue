@@ -31,6 +31,7 @@
         label="Search"
         label-color="white"
         v-model="text"
+        autofocus
         clearable
         dark
       >
